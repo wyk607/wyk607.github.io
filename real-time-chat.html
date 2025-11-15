@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多人实时聊天平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .chat-box {
+            width: 90%;
+            max-width: 700px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            background-color: #409EFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .chat-messages {
+            height: 450px;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .message {
+            margin-bottom: 12px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            max-width: 75%;
+            word-break: break-all;
+        }
+        .message.self {
+            background-color: #409EFF;
+            color: #fff;
+            margin-left: auto;
+        }
+        .message.other {
+            background-color: #f5f7fa;
+            color: #333;
+            margin-right: auto;
+        }
+        .message .username {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 3px;
+            display: block;
+        }
+        .chat-input {
+            display: flex;
+            padding: 12px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        .chat-input button {
+            background-color: #409EFF;
+            color: #fff;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .chat-input button:hover {
+            background-color: #66b1ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+        <div class="chat-header">多人实时聊天平台</div>
+        <div class="chat-messages" id="messageContainer"></div>
+        <div class="chat-input">
+            <input type="text" id="msgInput" placeholder="输入消息后按回车或点击发送...">
+            <button id="sendBtn">发送</button>
+        </div>
+    </div>
+
+    <script>
+        // 连接免费的 WebSocket 中继服务（此处用 wss://ws.ifelse.io 示例，也可替换为其他免费服务）
+        const socket = new WebSocket('wss://ws.ifelse.io');
+
+        // 页面元素
+        const messageContainer = document.getElementById('messageContainer');
+        const msgInput = document.getElementById('msgInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // 生成随机用户名（用于区分不同用户）
+        const username = '用户' + Math.floor(Math.random() * 1000);
+
+        // 接收消息
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const isSelf = data.username === username;
+            const messageEl = document.createElement('div');
+            messageEl.className = `message ${isSelf ? 'self' : 'other'}`;
+            messageEl.innerHTML = `<span class="username">${data.username}</span>${data.message}`;
+            messageContainer.appendChild(messageEl);
+            messageContainer.scrollTop = messageContainer.scrollHeight; // 滚动到底部
+        };
+
+        // 发送消息
+        function sendMessage() {
+            const message = msgInput.value.trim();
+            if (message) {
+                socket.send(JSON.stringify({ username, message }));
+                msgInput.value = '';
+            }
+        }
+
+        // 绑定事件
+        sendBtn.addEventListener('click', sendMessage);
+        msgInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
+
