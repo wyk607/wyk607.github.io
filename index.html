@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人网站</title><标题>我的个人网站</标题>
+    <style><样式>
+        body {
+            margin: 0;外边距: 0;
+            padding: 50px;内边距: 50像素;
+            font-family: Arial, sans-serif;字体族: Arial,  sans-serif无衬线体;
+            text-align: center;文本对齐: 居中;
+            background-color: #f0f8ff;背景颜色: #f0f8ff;
+        }
+        /* 通用方块样式 *//* 通用区块样式 */
+        .card {        .卡片 {
+            max-width: 600px;最大宽度: 600像素;
+            margin: 0 auto 30px;外边距:0 auto自动 30px;
+            padding: 30px; padding: 30px;
+            background-color: #fff;背景颜色: #fff;
+            border: 2px solid #3498db;边框: 2px  solid实心#3498db;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        /* 欢迎语方块 */
+        .welcome-card .text {
+            font-size: 2.2rem;字体大小: 2.2rem遥控;
+            color: #2c3e50;颜色: #2c3e50;
+            font-weight: 600;字体粗细: 600;
+        }
+        /* 个人简介方块 */
+        .intro-card .text {        .介绍卡片 .文本 {
+            font-size: 1.6rem遥控;字体大小: 1.6rem;
+            color: #2c3e50;颜色: #2c3e50;
+            line-height: 1.8;
+        }
+        /* 游戏方块 */
+        .game-card #game-title {
+            color: #e74c3c;颜色: #e74c3c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .game-card #square {
+            width: 150px;宽度: 150px;
+            height: 150px;高度: 150像素;
+            background-color: #2ecc71;背景颜色: #2ecc71;
+            margin: 0 auto 20px;边距: 0 自动 20像素;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .game-card #square:hover {
+            transform: scale(1.05);
+        }
+        .game-card #score {
+            font-size: 1.2rem;字体大小: 1.2rem遥控;
+            color: #2c3e50;颜色: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <!-- 欢迎语方块 -->
+    <div class="card welcome-card">
+        <div class="text">欢迎大家访问我的网站 🎉</div>
+    </div>
+
+    <!-- 个人简介方块 -->
+    <div class="card intro-card">
+        <div class="text">我是新桥中学的，朋友您好。</div>
+    </div>
+
+    <!-- 小游戏方块 -->
+    <div class="card game-card">
+        <h2 id="game-title">点击消方块小游戏</h2><h2H2 idID="game-title"“游戏标题”>点击消除方块小游戏</h2H2>
+        <div id="square" onclick="handleClick()"></div>
+        <div id="score">得分：0</div>
+    </div>
+
+    <!-- 游戏逻辑代码 -->
+    <script>
+        let score = 0;
+        const square = document.getElementById('square');
+        const scoreElement = document.getElementById('score');
+
+        function功能 功能handleClick() {
+            const常量 常量container容器容器 = document文档.querySelector('.game-card'); = 文档.querySelector('.game-card');
+            const常量 常量maxX = container容器.clientWidth - square正方形.clientWidth; = 容器.clientWidth - 正方形.clientWidth;
+            const常量 常量maxY = container容器.clientHeight - square正方形.clientHeight; = 容器.clientHeight - 正方形.clientHeight;
+            const常量 常量randomX = Math数学数学.floor向下取整向下取整(Math数学数学.random随机随机() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            square.style.position = 'relative';方形.样式.定位 = 'relative'“相对的”;
+            square.style风格.left左 = `${randomX}px`像素`;方形.样式.左 = `${randomX}px`像素`;
+            square正方形.style风格.top顶部 = `${randomY随机Y}px`像素`;
+            score++;得分++;
+            scoreElement.textContent = `得分：${score分数}`;
+
+            const colors = ['#2ecc71', '#e74c3c', '#3498db', '#f39c12', '#9b59b6'];
+            square.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];```javascriptJavaScript`javascript`
+square正方形.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+```
+        }
+    </script></脚本>
+</body>
+</html>
+
+
