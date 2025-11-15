@@ -1,54 +1,54 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多人实时聊天平台</title>
-    <style>
+<!DOCTYPE文档类型 html><!DOCTYPE html>
+<html lang语言语言语言语言="zh-CN"“zh-CN”>
+<head头部头部>
+    <meta元数据元数据 charset字符集字符集字符集字符集="UTF-8"“UTF-8”>
+    <meta元数据元数据 name名称名称="viewport"“viewport” content内容内容="width=device-width, initial-scale=1.0"“width=device-width, initial-scale=1.0”>
+    <title标题标题>多人实时聊天平台</title标题标题>多人实时聊天平台
+    <style风格风格>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", Arial, sans-serif;
+            margin: 0;外边距: 0;外边距: 0;
+            padding填充: 0;内边距: 0;；内边距：0;
+            box盒子-sizing尺寸: border边框-box盒子;盒模型: border边框-box盒子;
+            font字体-family字体: "Microsoft Yahei"微软雅黑, Arial, sans无衬线-serif衬线;字体族: "微软雅黑", Arial,  sans无衬线-serif衬线;字体族:"微软雅黑", Arial,  sans-serif;
         }
-        body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        body正文 {
+            background背景-color颜色: #f0f2f5;背景颜色: #f0f2f5;
+            display显示: flex弹性;
+            justify对齐-content内容: center中心;
+            align对齐-items项: center中心;
+            min最小-height高度: 100vh;
         }
-        .chat-box {
-            width: 90%;
-            max-width: 700px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+        .chat.聊天-box盒子 {.chat.聊天框盒子 {.chat.聊天框盒子 {.chat.聊天框盒子 {
+            width宽度: 90%;
+            max最大-width宽度: 700px;
+            background背景-color颜色: #fff;
+            border边框-radius: 10px;
+            box盒子-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;溢出: hidden;
         }
         .chat-header {
-            background-color: #409EFF;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.2rem;
+            background-color: #409EFF;背景颜色: #409EFF;
+            color: #fff;颜色: #fff;
+            padding: 15px;内边距: 15像素;：15px；内边距：15像素；
+            text-align: center;文本对齐: 居中;：居中；文本对齐：居中；
+            font-size: 1.2rem;字体大小: 1.2rem;：1.2rem；字体大小：1.2rem；
         }
         .chat-messages {
-            height: 450px;
-            padding: 15px;
-            overflow-y: auto;
-            border-bottom: 1px solid #eaeaea;
+            height: 450px;高度: 450像素;：450px；高度：450像素；
+            padding: 15px;内边距: 15像素;：15px；内边距：15像素；
+            overflow-y: auto;垂直溢出: auto;
+            border-bottom: 1px solid #eaeaea;下边框: 1像素 实线#eaeaea;
         }
         .message {
-            margin-bottom: 12px;
+            margin-bottom: 12px;底部边距: 12像素;
             padding: 8px 15px;
             border-radius: 8px;
             max-width: 75%;
             word-break: break-all;
         }
         .message.self {
-            background-color: #409EFF;
-            color: #fff;
+            background-color: #409EFF;背景颜色: #409EFF;
+            color: #fff;颜色: #fff;
             margin-left: auto;
         }
         .message.other {
