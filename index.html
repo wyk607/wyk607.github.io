@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的网站+小游戏</title><标题>我的网站+小游戏</标题>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background: #f5f5f5;
+            padding: 30px 20px;
+        }
+        /* 动态渐变色欢迎语 */
+        .welcome-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            /* 渐变色背景 */
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #2ecc71);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* 动态动画 */
+            animation: gradientAnimation 8s ease infinite;
+        }
+        /* 渐变色动画关键帧 */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* 游戏容器 */
+        #game-container {
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 0 auto;
+            border: 2px solid #3498db;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        /* 恐龙样式 */
+        #dino {
+            width: 60px;
+            height: 80px;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80"><path fill="%232d3436" d="M30,0 L20,20 L10,20 L15,35 L5,35 L8,50 L20,50 L22,40 L25,50 L35,50 L38,40 L40,50 L52,50 L55,35 L45,35 L50,20 L40,20 Z"/><path fill="%23636e72" d="M22,10 L28,10 L30,15 L20,15 Z"/></svg>');
+            background-size: cover;
+        }
+        /* 仙人掌障碍物 */
+        .cactus {
+            width: 30px;
+            height: 60px;
+            position: absolute;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 60"><path fill="%2327ae60" d="M15,0 L10,20 L5,20 L8,30 L3,30 L5,40 L10,40 L12,30 L18,30 L20,40 L25,40 L27,30 L22,30 L25,20 L20,20 Z"/></svg>');
+            background-size: cover;
+        }
+        /* 分数与提示 */
+        #score {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        #tip {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #636e72;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态渐变色欢迎语 -->
+    <div class="welcome-text">欢迎大家访问我的网站 🎉</div>
+
+    <!-- 小游戏区域 -->
+    <div id="game-container">
+        <div id="dino"></div>
+        <div id="score">分数：0</div>
+        <div id="tip">点击屏幕/按空格开始（空格跳跃躲避仙人掌）</div>
+    </div>
+
+    <!-- 游戏逻辑代码 -->
+    <script>
+        const dino = document.getElementById('dino');
+        const gameBox = document.getElementById('game-container');
+        const scoreEle = document.getElementById('score');
+        const tipEle = document.getElementById('tip');
+        
+        let isJumping = false;
+        let velocity = 0;
+        let gravity = 0.6;
+        let score = 0;
+        let gameRunning = false;
+        let obstacleTimer;
+
+        // 恐龙跳跃
+        function jump() {
+            if (isJumping) return;
+            velocity = -15;
+            isJumping = true;
+        }
+
+        // 创建仙人掌
+        function createCactus() {
+            if (!gameRunning) return;
+            const cactus = document.createElement('div');
+            cactus.classList.add('cactus');
+            cactus.style.left = `${gameBox.clientWidth}px`;
+            gameBox.appendChild(cactus);
+
+            // 移动仙人掌+碰撞检测
+            const moveInterval = setInterval(() => {
+                if (!gameRunning) {
+                    clearInterval(moveInterval);
+                    return;
+                }
+                const left = parseFloat(cactus.style.left) - 5;
+                cactus.style.left = `${left}px`;
+
+                // 移除仙人掌+加分
+                if (left < -30) {
+                    clearInterval(moveInterval);
+                    gameBox.removeChild(cactus);
+                    score += 10;
+                    scoreEle.textContent = `分数：${score}`;
+                }
+
+                // 碰撞检测（游戏结束）
+                const dinoRect = dino.getBoundingClientRect();
+                const cactusRect = cactus.getBoundingClientRect();
+                if (
+                    dinoRect.right > cactusRect.left &&
+                    dinoRect.left < cactusRect.right &&
+                    dinoRect.bottom > cactusRect.top
+                ) {
+                    gameOver();
+                }
+            }, 20);
+        }
+
+        // 游戏结束
+        function gameOver() {
+            gameRunning = false;
+            clearInterval(obstacleTimer);
+            tipEle.textContent = `游戏结束！得分：${score}，点击/空格重新开始`;
+            tipEle.style.display = 'block';
+        }
+
+        // 游戏循环
+        function gameLoop() {function 游戏循环() {
+            if (!gameRunning) return;if (!游戏运行) return;
+            velocity += gravity;速度 += gravity;
+            const bottom = Math.max(0, parseFloat(dino.style.bottom || 0) + velocity);```javascript
+const bottom = Math.max(0, parseFloat(dino.style.bottom || 0) + velocity);
+```
+            dino.style.bottom = `${bottom}px`;
+            if如果 (bottom底部 === 0) isJumping正在跳跃 = false假;
+            requestAnimationFrame(gameLoop游戏循环);
+        }
+
+        // 开始游戏
+        function功能 startGame开始游戏() {
+            dino恐龙.style风格.bottom底部 = '0';
+            score = 0;
+            scoreEle分数Ele.textContent = '分数：0';
+            gameRunning游戏进行中 = true;
+            tipEle提示Ele.style.display = 'none';
+            document文档.querySelectorAll('.cactus').forEach(cC => cC.remove移除());
+            gameLoop游戏循环();
+            obstacleTimer = setInterval(createCactus创建仙人掌, 1500);
+        }
+
+        // 事件监听（跳跃/开始）
+        document文档.addEventListener('keydown', (e) => {
+            if如果 (e.code代码 === 'Space''空格') gameRunning游戏进行中 ? jump跳跃() : startGame开始游戏();
+        });
+        gameBox.addEventListener('click'点击, () => {
+            gameRunning游戏进行中 ? jump() : startGame开始游戏();
+        });
+
+        // 窗口 resize 重置// 窗口调整大小时重置
+        window.addEventListener('resize''调整大小', () => {
+            if (gameRunning) gameOver游戏结束();
+        });
+    </script脚本>
+</body正文>
+</html>
