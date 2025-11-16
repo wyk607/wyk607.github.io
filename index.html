@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七年级上册知识点复习网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 自定义Tailwind配置：果冻效果、渐变配色
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366F1', // 主色调（蓝紫色）
+                        subject: {
+                            chinese: '#EC4899',    // 语文（粉色）
+                            math: '#10B981',      // 数学（绿色）
+                            english: '#3B82F6',   // 英语（蓝色）
+                            biology: '#F59E0B',   // 生物（橙色）
+                            geography: '#8B5CF6', // 地理（紫色）
+                            history: '#EF4444',   // 历史（红色）
+                            politics: '#14B8A6'   // 道法（青色）
+                        }
+                    },
+                    animation: {
+                        'jelly': 'jelly 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        jelly: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '25%': { transform: 'scale(0.95)' },
+                            '75%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-bg {
+                background: linear-gradient(135deg, #f0f9ff 0%, #e6fffa 100%);
+            }
+            .subject-card {
+                @apply relative rounded-2xl p-6 shadow-lg transition-all duration-300 hover:animate-jelly hover:shadow-xl;
+            }
+            .subject-icon {
+                @apply absolute -top-4 left-6 text-3xl bg-white p-3 rounded-full shadow-md;
+            }
+            .content-section {
+                @apply hidden mt-8 p-6 bg-white rounded-2xl shadow-lg;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen font-sans text-gray-800">
+    <!-- 头部导航 -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary flex items-center">
+                <i class="fa fa-book mr-2"></i>七年级上册知识点复习
+            </h1>
+            <button id="messageBtn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-full transition-all duration-300 flex items-center">
+                <i class="fa fa-comment mr-2"></i>留言板
+            </button>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 科目卡片网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 语文 -->
+            <div class="subject-card bg-subject-chinese/10 border-2 border-subject-chinese/30" onclick="showSubject('chinese')">
+                <i class="fa fa-pencil subject-icon text-subject-chinese"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-chinese">语文</h2>
+                <p class="mt-2 text-gray-600">古诗文、现代文阅读、写作技巧等核心知识点</p>
+            </div>
+
+            <!-- 数学 -->
+            <div class="subject-card bg-subject-math/10 border-2 border-subject-math/30" onclick="showSubject('math')">
+                <i class="fa fa-calculator subject-icon text-subject-math"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-math">数学</h2>
+                <p class="mt-2 text-gray-600">有理数、整式的加减、一元一次方程等重点内容</p>
+            </div>
+
+            <!-- 英语 -->
+            <div class="subject-card bg-subject-english/10 border-2 border-subject-english/30" onclick="showSubject('english')">
+                <i class="fa fa-language subject-icon text-subject-english"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-english">英语</h2>
+                <p class="mt-2 text-gray-600">单词、语法、句型、阅读理解等基础知识点</p>
+            </div>
+
+            <!-- 生物 -->
+            <div class="subject-card bg-subject-biology/10 border-2 border-subject-biology/30" onclick="showSubject('biology')">
+                <i class="fa fa-leaf subject-icon text-subject-biology"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-biology">生物</h2>
+                <p class="mt-2 text-gray-600">生物的特征、细胞结构、生态系统等核心内容</p>
+            </div>
+
+            <!-- 地理 -->
+            <div class="subject-card bg-subject-geography/10 border-2 border-subject-geography/30" onclick="showSubject('geography')">
+                <i class="fa fa-globe subject-icon text-subject-geography"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-geography">地理</h2>
+                <p class="mt-2 text-gray-600">地球和地图、陆地和海洋、天气与气候等</p>
+            </div>
+
+            <!-- 历史 -->
+            <div class="subject-card bg-subject-history/10 border-2 border-subject-history/30" onclick="showSubject('history')">
+                <i class="fa fa-history subject-icon text-subject-history"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-history">历史</h2>
+                <p class="mt-2 text-gray-600">中国古代史（远古人类至秦汉时期）重点梳理</p>
+            </div>
+
+            <!-- 道德与法治 -->
+            <div class="subject-card bg-subject-politics/10 border-2 border-subject-politics/30" onclick="showSubject('politics')">
+                <i class="fa fa-balance-scale subject-icon text-subject-politics"></i>
+                <h2 class="text-2xl font-bold mt-4 text-subject-politics">道德与法治</h2>
+                <p class="mt-2 text-gray-600">成长的节拍、友谊与交往、师生交往等内容</p>
+            </div>
+        </div>
+
+        <!-- 语文内容区 -->
+        <section id="chineseContent" class="content-section border-l-4 border-subject-chinese">
+            <h2 class="text-2xl font-bold text-subject-chinese mb-4">语文七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">古诗文默写</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>《观沧海》曹操：东临碣石，以观沧海...</li>
+                        <li>《闻王昌龄左迁龙标遥有此寄》李白：杨花落尽子规啼...</li>
+                        <li>《次北固山下》王湾：客路青山外，行舟绿水前...</li>
+                        <li>《天净沙·秋思》马致远：枯藤老树昏鸦...</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">现代文阅读技巧</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>记叙文：把握时间、地点、人物、事件四要素</li>
+                        <li>说明文：识别说明方法（举例子、列数字、打比方等）</li>
+                        <li>议论文：找出中心论点、论据类型及论证方法</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数学内容区 -->
+        <section id="mathContent" class="content-section border-l-4 border-subject-math">
+            <h2 class="text-2xl font-bold text-subject-math mb-4">数学七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">有理数</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>正数和负数：具有相反意义的量</li>
+                        <li>数轴：三要素（原点、正方向、单位长度）</li>
+                        <li>绝对值：|a|≥0，互为相反数的绝对值相等</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">一元一次方程</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>定义：只含一个未知数，未知数次数为1</li>
+                        <li>解法：去分母→去括号→移项→合并同类项→系数化为1</li>
+                        <li>应用：行程问题、工程问题、利润问题等</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 英语内容区 -->
+        <section id="englishContent" class="content-section border-l-4 border-subject-english">
+            <h2 class="text-2xl font-bold text-subject-english mb-4">英语七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">重点单词</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>问候类：hello, hi, good morning/afternoon/evening</li>
+                        <li>数字类：one-two-ten, eleven-twenty, thirty, hundred</li>
+                        <li>家庭成员：father, mother, brother, sister, family</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">基础语法</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>be动词：am/is/are的用法（I用am，you用are，he/she/it用is）</li>
+                        <li>名词单复数：一般加s，以s/x/ch/sh结尾加es</li>
+                        <li>一般现在时：主语为第三人称单数时动词变三单</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生物内容区 -->
+        <section id="biologyContent" class="content-section border-l-4 border-subject-biology">
+            <h2 class="text-2xl font-bold text-subject-biology mb-4">生物七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">生物的特征</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>生物的生活需要营养</li>
+                        <li>生物能进行呼吸</li>
+                        <li>生物能排出身体内产生的废物</li>
+                        <li>生物能对外界刺激作出反应</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">细胞结构</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>植物细胞：细胞壁、细胞膜、细胞质、细胞核、液泡、叶绿体</li>
+                        <li>动物细胞：细胞膜、细胞质、细胞核</li>
+                        <li>细胞核是遗传信息库</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 地理内容区 -->
+        <section id="geographyContent" class="content-section border-l-4 border-subject-geography">
+            <h2 class="text-2xl font-bold text-subject-geography mb-4">地理七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">地球和地图</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>地球形状：两极稍扁、赤道略鼓的不规则球体</li>
+                        <li>纬线：指示东西方向，赤道最长，向两极递减</li>
+                        <li>经线：指示南北方向，长度相等，相交于两极</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">天气与气候</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>天气：短时间、多变（如晴、雨、风）</li>
+                        <li>气候：长时间、稳定（如热带季风气候）</li>
+                        <li>常用天气符号：晴☀️、雨🌧️、风🌪️等</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 历史内容区 -->
+        <section id="historyContent" class="content-section border-l-4 border-subject-history">
+            <h2 class="text-2xl font-bold text-subject-history mb-4">历史七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">远古人类</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>元谋人：我国境内目前已确认的最早古人类（约170万年）</li>
+                        <li>北京人：会使用火和打制石器，过群居生活</li>
+                        <li>山顶洞人：掌握磨光和钻孔技术，会人工取火</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">秦汉时期</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>秦朝：公元前221年嬴政统一中国，建立中央集权制度</li>
+                        <li>汉朝：汉武帝时期实现大一统，开辟丝绸之路</li>
+                        <li>造纸术：东汉蔡伦改进造纸术，促进文化传播</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 道德与法治内容区 -->
+        <section id="politicsContent" class="content-section border-l-4 border-subject-politics">
+            <h2 class="text-2xl font-bold text-subject-politics mb-4">道德与法治七年级上册核心知识点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">成长的节拍</h3>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                        <li>中学时代：人生发展的一个新阶段，为一生奠定基础</li>
+                        <li>学习新天地：学习不仅是知识的获取，也是能力的培养</li>
+                        <li>发现自己：正确认识自我，接纳和欣赏自己</li>
+                    </ul>
+                </div>
+                <div>
+                    <h
+
+<data-inline-no-margin type="video-group" value_id="29524825476283394_0_7406" alt="" extra="{&quot;video_title_show&quot;:true}"></data-inline-no-margin>
