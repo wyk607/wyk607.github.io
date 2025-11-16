@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wk的复习网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        subject: {
+                            chinese: '#EC4899',    // 语文（粉色）
+                            math: '#10B981',      // 数学（绿色）
+                            english: '#3B82F6',   // 英语（蓝色）
+                            biology: '#F59E0B',   // 生物（橙色）
+                            geography: '#8B5CF6', // 地理（紫色）
+                            history: '#EF4444',   // 历史（红色）
+                            politics: '#14B8A6'   // 道法（青色）
+                        }
+                    },
+                    animation: {
+                        'jelly': 'jelly 0.8s ease-in-out infinite alternate',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        jelly: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.02)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-title {
+                background: linear-gradient(90deg, #6366F1, #EC4899, #10B981, #3B82F6);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                background-size: 300% 100%;
+                animation: gradient-shift 8s ease infinite;
+            }
+            .subject-section {
+                @apply rounded-3xl p-6 md:p-8 shadow-xl mb-10 transition-all duration-500 hover:animate-jelly;
+            }
+            .card-float {
+                @apply animate-float;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background-color: #f8fafc;
+        }
+
+        .subject-icon {
+            transition: transform 0.3s ease;
+        }
+        .subject-section:hover .subject-icon {
+            transform: rotate(15deg) scale(1.2);
+        }
+    </style>
+</head>
+<body class="container mx-auto px-4 py-8 font-sans">
+    <!-- 标题区域 -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-black gradient-title mb-4 card-float">wk的复习网站</h1>
+        <p class="text-gray-600 text-lg">人教版七年级上册7科核心知识点+例题（精准复习版）</p>
+    </header>
+
+    <main>
+        <!-- 语文板块 -->
+        <section class="subject-section bg-subject-chinese/5 border-2 border-subject-chinese/20">
+            <div class="flex items-center mb-6">
+                <i class="fa fa-pencil subject-icon text-3xl text-subject-chinese mr-4"></i>
+                <h2 class="text-3xl font-bold text-subject-chinese">语文</h2>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-bookmark text-subject-chinese mr-2"></i>核心知识点
+                </h3>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>基础：生字词字音字形、作家常识（老舍、孔子等）；必背篇目默写（《论语》十二章、《古代诗歌四首》等）。</li>
+                    <li>阅读：记叙文抓人物、事件、情感；文言文掌握实词虚词、特殊句式；名著《朝花夕拾》篇目与作者情感。</li>
+                    <li>写作：记叙文立意与结构，规范开头结尾，积累日常素材。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-question-circle text-subject-chinese mr-2"></i>例题
+                </h3>
+                <div class="space-y-4 text-gray-700 pl-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">1. 文言翻译：“学而不思则罔，思而不学则殆。”</p>
+                        <p class="text-subject-chinese mt-2">（答案：只学习不思考就会迷惑，只思考不学习就会疑惑。）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">2. 阅读：《背影》中父亲买橘子的细节描写有何作用？</p>
+                        <p class="text-subject-chinese mt-2">（答案：刻画父亲的慈爱与不易，凸显深沉的父爱，深化文章主题。）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数学板块 -->
+        <section class="subject-section bg-subject-math/5 border-2 border-subject-math/20">
+            <div class="flex items-center mb-6">
+                <i class="fa fa-calculator subject-icon text-3xl text-subject-math mr-4"></i>
+                <h2 class="text-3xl font-bold text-subject-math">数学</h2>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-bookmark text-subject-math mr-2"></i>核心知识点
+                </h3>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>有理数：数轴三要素，相反数、绝对值计算，混合运算“先乘方，再乘除，最后加减”。</li>
+                    <li>整式的加减：单项式、多项式定义，去括号法则，合并同类项。</li>
+                    <li>一元一次方程：等式性质，解方程五步步骤，行程、利润等实际问题求解。</li>
+                    <li>几何图形初步：平面/立体图形区分，直线、射线、线段差异，立体图形展开图。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-question-circle text-subject-math mr-2"></i>例题
+                </h3>
+                <div class="space-y-4 text-gray-700 pl-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">1. 计算：-2² + |5 - 8| + 2×(-3)</p>
+                        <p class="text-subject-math mt-2">（答案：-4 + 3 - 6 = -7）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">2. 解方程：(2x - 1)/3 = 1 - (x + 2)/4</p>
+                        <p class="text-subject-math mt-2">（答案：去分母得4(2x-1)=12-3(x+2)，解得x=10/11）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">3. 几何：下列图形中，不能作为正方体展开图的是（ ）</p>
+                        <p class="text-subject-math mt-2">（答案：选“田”字形或“凹”字形选项）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 英语板块 -->
+        <section class="subject-section bg-subject-english/5 border-2 border-subject-english/20">
+            <div class="flex items-center mb-6">
+                <i class="fa fa-language subject-icon text-3xl text-subject-english mr-4"></i>
+                <h2 class="text-3xl font-bold text-subject-english">英语</h2>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-bookmark text-subject-english mr-2"></i>核心知识点
+                </h3>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>词汇：26个字母及元音发音，基础词汇（家庭成员、学习用品），人称/物主代词区分。</li>
+                    <li>语法：be动词与人称搭配，一般现在时基础用法。</li>
+                    <li>句型：日常交际句型（姓名询问、物品位置、问候告别），一般疑问句应答。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-question-circle text-subject-english mr-2"></i>例题
+                </h3>
+                <div class="space-y-4 text-gray-700 pl-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">1. 用所给词适当形式填空：This is my sister. ______ (she) name is Lucy.</p>
+                        <p class="text-subject-english mt-2">（答案：Her）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">2. 单选：—What ______ your brother do? —He is a student. A. do B. does C. is</p>
+                        <p class="text-subject-english mt-2">（答案：B，解析：主语是第三人称单数，助动词用does）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">3. 句型转换：She is in Class 3.（改为一般疑问句）</p>
+                        <p class="text-subject-english mt-2">（答案：Is she in Class 3?）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生物板块 -->
+        <section class="subject-section bg-subject-biology/5 border-2 border-subject-biology/20">
+            <div class="flex items-center mb-6">
+                <i class="fa fa-leaf subject-icon text-3xl text-subject-biology mr-4"></i>
+                <h2 class="text-3xl font-bold text-subject-biology">生物</h2>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-bookmark text-subject-biology mr-2"></i>核心知识点
+                </h3>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>基础特征：生物由细胞构成（病毒除外），营养、呼吸、生长繁殖等基本特征。</li>
+                    <li>细胞：显微镜使用方法，动植物细胞结构差异，临时装片制作步骤。</li>
+                    <li>生物体结构：细胞分裂分化，动植物组织类型，植物无系统层次。</li>
+                    <li>植物类群：藻类、苔藓、蕨类植物特征，裸子/被子植物差异。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-question-circle text-subject-biology mr-2"></i>例题
+                </h3>
+                <div class="space-y-4 text-gray-700 pl-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">1. 单选：下列属于生物的是（ ）A. 机器人 B. 珊瑚 C. 生石花</p>
+                        <p class="text-subject-biology mt-2">（答案：C，解析：生石花具有生物的生长繁殖等特征）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">2. 填空：显微镜下观察到的物像呈倒像，若将标本向左移动，视野中物像会向______移动。</p>
+                        <p class="text-subject-biology mt-2">（答案：右）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">3. 简答：写出植物细胞与动物细胞的一个结构差异。</p>
+                        <p class="text-subject-biology mt-2">（答案：植物细胞有细胞壁，动物细胞无；或植物细胞有液泡/叶绿体，动物细胞无）</p><p class="text-subject-biology mt-2">（答案：植物细胞具有细胞壁，而动物细胞没有；或者植物细胞含有液泡/叶绿体，动物细胞则无）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 历史板块 -->
+        <section class="subject-section bg-subject-history/5 border-2 border-subject-history/20">
+            <div class="flex items-center mb-6">
+                <i class="fa fa-history subject-icon text-3xl text-subject-history mr-4"></i>
+                <h2 class="text-3xl font-bold text-subject-history">历史</h2>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-bookmark text-subject-history mr-2"></i>核心知识点
+                </h3>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>远古与史前：北京人生活年代（约70-20万年）、特征，半坡（半地穴式房屋）、河姆渡（干栏式房屋）居民差异。</li>
+                    <li>夏商周：夏朝是首个王朝，分封制内容，甲骨文、青铜文明成就。</li>
+                    <li>春秋战国：春秋五霸、战国七雄，商鞅变法内容及影响，百家争鸣主要学派（儒、法、道）主张。</li>
+                    <li>秦汉：秦统一措施（统一文字、货币、度量衡），汉武帝大一统举措，丝绸之路意义。</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-question-circle text-subject-history mr-2"></i>例题
+                </h3>
+                <div class="space-y-4 text-gray-700 pl-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">1. 单选：我国有文字可考的历史始于（ ）A. 夏朝 B. 商朝 C. 西周</p>
+                        <p class="text-subject-history mt-2">（答案：B，解析：甲骨文是商代文字，是我国现存最早的成熟文字）</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm">
+                        <p class="font-medium">2. 填空：商鞅变法中，奖励军功的措施是______。</p>
+                        <p class="text-subject-history mt-2">（答案：对有军功者授予爵位并赏赐土地）</p>
+                    </div
